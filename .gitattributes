@@ -1,0 +1,3 @@
+*.sh  text eol=LF
+*.cmd text eol=CRLF
+*.java text eol=LF
