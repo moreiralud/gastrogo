@@ -1,0 +1,23 @@
+version: "3.8"
+services:
+  mongo:
+    image: "mongo:6.0"
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  gastrogo-app:
+    build: .
+    container_name: gastrogo
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/gastrogo
+    depends_on:
+      - mongo
+
+volumes:
+  mongo-data:
