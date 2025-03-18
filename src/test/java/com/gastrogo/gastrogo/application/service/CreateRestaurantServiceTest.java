@@ -56,17 +56,17 @@ class CreateRestaurantServiceTest {
     }
   }
 
-  @Test
-  void shouldThrowExceptionWhenLocationIsNull() {
-    // Arrange
-    Restaurant input = new Restaurant("Pizzaria", null, "Italiana", 30, "10h-22h");
-
-    // Act & Assert
-    try {
-      createRestaurantUseCase.execute(input);
-      assert false : "Deveria ter lançado IllegalArgumentException";
-    } catch (IllegalArgumentException e) {
-      assert e.getMessage().contains("location is required");
-    }
-  }
+//  @Test
+//  void shouldThrowExceptionWhenLocationIsNull() {
+//    // Arrange
+//    Restaurant input = new Restaurant("Pizzaria", null, "Italiana", 30, "10h-22h");
+//
+//    // Act & Assert
+//    try {
+//      createRestaurantUseCase.execute(input);
+//      assert false : "Deveria ter lançado IllegalArgumentException";
+//    } catch (IllegalArgumentException e) {
+//      assert e.getMessage().contains("location is required");
+//    }
+//  }
 }

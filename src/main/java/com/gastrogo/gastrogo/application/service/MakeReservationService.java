@@ -2,6 +2,7 @@ package com.gastrogo.gastrogo.application.service;
 
 import com.gastrogo.gastrogo.application.usecase.MakeReservationUseCase;
 import com.gastrogo.gastrogo.domain.entity.Reservation;
+import com.gastrogo.gastrogo.domain.entity.ReservationStatus;
 import com.gastrogo.gastrogo.domain.entity.Restaurant;
 import com.gastrogo.gastrogo.domain.repository.ReservationRepository;
 import com.gastrogo.gastrogo.domain.repository.RestaurantRepository;
@@ -19,21 +20,24 @@ public class MakeReservationService implements MakeReservationUseCase {
 
   @Override
   public Reservation execute(String restaurantId, String userId, LocalDateTime dateTime, int numberOfPeople) {
-    // 1) Verifica se a data/hora está no futuro
+    // Validação: a data deve ser no futuro
     if (dateTime.isBefore(LocalDateTime.now())) {
-      throw new IllegalArgumentException("Cannot make a reservation in the past.");
+      throw new IllegalArgumentException("Cannot reserve in the past");
     }
-    // 2) Verifica se o restaurante existe
+
+    // Validação: restaurante deve existir
     Restaurant restaurant = restaurantRepository.findById(restaurantId)
             .orElseThrow(() -> new IllegalArgumentException("Restaurant not found: " + restaurantId));
 
-    // 3) (Opcional) Verificar a capacidade do restaurante e se já há reservas
-    // Exemplo bem simples:
-    //  - Fazer uma consulta de reservas naquele horário e recusar se exceder a capacidade
-    //  - Dependendo da lógica, poderia checar intervalos de tempo, etc.
+    // Validação: número de pessoas não pode exceder a capacidade
+    if (numberOfPeople > restaurant.getCapacity()) {
+      throw new IllegalArgumentException("Exceeds restaurant capacity");
+    }
 
-    // Cria a reserva e salva
+    // Cria a reserva, definindo o status como CONFIRMED
     Reservation reservation = new Reservation(restaurantId, userId, dateTime, numberOfPeople);
+    reservation.setStatus(ReservationStatus.CONFIRMED);
+
     return reservationRepository.save(reservation);
   }
 }

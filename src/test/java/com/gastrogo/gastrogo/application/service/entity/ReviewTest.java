@@ -37,12 +37,8 @@ class ReviewTest {
 
   @Test
   void testInvalidRating() {
-    // Caso queira validar rating fora do range, mas isso depende se
-    // a lógica está na própria entidade Review ou no EvaluateRestaurantService.
-    // Se a entidade contiver validação no setter, podemos testar aqui:
+    // Caso queira validar rating fora do range, agora o setter possui a lógica de validação.
     Review r = new Review();
-    // Suponha que no setter do rating haja algo tipo:
-    // if (value < 0 || value > 5) throw new IllegalArgumentException("Invalid rating");
     try {
       r.setRating(6.0);
       fail("Deveria ter lançado exceção para rating > 5");
@@ -50,4 +46,5 @@ class ReviewTest {
       assertTrue(e.getMessage().contains("Invalid rating"));
     }
   }
+
 }

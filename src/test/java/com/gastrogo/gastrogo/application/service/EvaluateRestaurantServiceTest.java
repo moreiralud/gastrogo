@@ -11,6 +11,8 @@ import org.mockito.Mockito;
 
 import java.util.Optional;
 
+import static com.mongodb.internal.connection.tlschannel.util.Util.assertTrue;
+import static org.junit.Assert.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -29,14 +31,13 @@ class EvaluateRestaurantServiceTest {
 
   @Test
   void shouldFailWhenRatingOutOfRange() {
-    Review invalidReview = new Review("rest001", "userX", 6.0, "Too high rating");
-    try {
-      evaluateRestaurantUseCase.execute(invalidReview);
-      assert false : "Deveria falhar, rating maior que 5";
-    } catch (IllegalArgumentException e) {
-      assert e.getMessage().contains("Rating must be between 0 and 5");
-    }
+    Review r = new Review();
+    Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+      r.setRating(6.0);
+    });
+    assertTrue(exception.getMessage().toLowerCase().contains("rating must be between 0 and 5"));
   }
+
 
   @Test
   void shouldFailIfRestaurantNotFound() {
