@@ -3,13 +3,15 @@ package com.gastrogo.gastrogo.domain.adapters.controller;
 import com.gastrogo.gastrogo.application.usecase.MakeReservationUseCase;
 import com.gastrogo.gastrogo.application.usecase.ManageReservationUseCase;
 import com.gastrogo.gastrogo.domain.entity.Reservation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 /**
  * Endpoints para gerenciar reservas de restaurantes.
@@ -24,8 +26,12 @@ public class ReservationController {
 
   /**
    * Cria uma nova reserva.
-   * Exemplo de uso de uma classe DTO para receber dados.
    */
+  @Operation(summary = "Cria uma nova reserva", description = "Cria uma nova reserva de restaurante com os dados fornecidos.")
+  @ApiResponses(value = {
+          @ApiResponse(responseCode = "200", description = "Reserva criada com sucesso"),
+          @ApiResponse(responseCode = "400", description = "Dados inválidos fornecidos")
+  })
   @PostMapping
   public ResponseEntity<Reservation> createReservation(@RequestBody CreateReservationRequest request) {
     Reservation reservation = makeReservationUseCase.execute(
@@ -39,22 +45,30 @@ public class ReservationController {
 
   /**
    * Cancela uma reserva.
-   * PATCH é semântico quando alteramos parcialmente um recurso (aqui, o status).
    */
+  @Operation(summary = "Cancela uma reserva", description = "Cancela a reserva identificada pelo ID, alterando seu status para CANCELLED.")
+  @ApiResponses(value = {
+          @ApiResponse(responseCode = "200", description = "Reserva cancelada com sucesso"),
+          @ApiResponse(responseCode = "404", description = "Reserva não encontrada")
+  })
   @PatchMapping("/{id}/cancel")
   public ResponseEntity<Reservation> cancelReservation(@PathVariable String id) {
     try {
       Reservation canceled = manageReservationUseCase.cancelReservation(id);
       return ResponseEntity.ok(canceled);
     } catch (IllegalArgumentException e) {
-      // Se a reserva não for encontrada ou alguma lógica falhar.
       return ResponseEntity.notFound().build();
     }
   }
 
   /**
-   * Conclui uma reserva (marca como COMPLETED).
+   * Conclui uma reserva.
    */
+  @Operation(summary = "Conclui uma reserva", description = "Marca a reserva identificada pelo ID como COMPLETED, indicando que a reserva foi finalizada.")
+  @ApiResponses(value = {
+          @ApiResponse(responseCode = "200", description = "Reserva concluída com sucesso"),
+          @ApiResponse(responseCode = "404", description = "Reserva não encontrada")
+  })
   @PatchMapping("/{id}/complete")
   public ResponseEntity<Reservation> completeReservation(@PathVariable String id) {
     try {
@@ -64,15 +78,10 @@ public class ReservationController {
       return ResponseEntity.notFound().build();
     }
   }
-
-  // Caso você tenha métodos para buscar reservas por usuário/restaurante,
-  // eles podem estar em outro UseCase ou repositório. Exemplo:
-  // (dependendo de como você estruturou o domain e usecases).
 }
 
 /**
- * DTO para criação de reserva, evita expor a entidade inteira diretamente.
- * Facilita validações específicas e deixa o controller mais claro.
+ * DTO para criação de reserva, que evita expor a entidade diretamente.
  */
 @Data
 class CreateReservationRequest {
