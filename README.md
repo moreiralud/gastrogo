@@ -1,6 +1,3 @@
-O ChatGPT disse:
-markdown
-Copiar
 # GastroGo
 
 GastroGo é uma API REST para gerenciamento de restaurantes, reservas e avaliações, desenvolvida com Spring Boot e MongoDB. A aplicação pode ser executada via Docker, permitindo deploy em ambientes diversos.
@@ -27,61 +24,54 @@ SPRING_PROFILES_ACTIVE=prod
 
 # Ou, para MongoDB local via Docker:
 # SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/gastrogo
-Importante: Remova os < e > e substitua pelos valores reais.
 
-Docker Compose
+Importante: Remova os < e > e substitua pelos valores reais.
+```
+## Docker Compose
+
 O arquivo docker-compose.yml está configurado para levantar dois containers (aplicação e MongoDB):
 
-yaml
-Copiar
+```
 version: '3.8'
 services:
-  mongo:
-    image: mongo:6.0
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongo-data:/data/db
+mongo:
+image: mongo:6.0
+ports:
+- "27017:27017"
+volumes:
+- mongo-data:/data/db
 
-  gastrogo-app:
-    build: .
-    ports:
-      - "8080:8080"
-    environment:
-      SPRING_DATA_MONGODB_URI: ${SPRING_DATA_MONGODB_URI}
-      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE}
-    depends_on:
-      - mongo
+gastrogo-app:
+build: .
+ports:
+- "8080:8080"
+environment:
+SPRING_DATA_MONGODB_URI: ${SPRING_DATA_MONGODB_URI}
+SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE}
+depends_on:
+- mongo
 
 volumes:
-  mongo-data: {}
-Execução
-Via Docker Compose
+mongo-data: {}
+
+```
+
+## Execução via Docker Compose
 Na raiz do projeto, execute:
 
-bash
-Copiar
+```
 docker compose up --build
+```
+
 A aplicação estará disponível em http://localhost:8080 e a documentação Swagger em http://localhost:8080/swagger-ui.html.
 
-Execução Local
-Configure as variáveis de ambiente (ou ajuste o application.properties).
+## Testes com Postman
 
-Compile a aplicação:
+## Exportar a Coleção:
 
-bash
-Copiar
-mvn clean package -DskipTests
-Execute o jar:
+No Postman, exporte a coleção de exemplos para um arquivo JSON (ex.: GastroGo.postman_collection.json)
 
-bash
-Copiar
-java -jar target/app.jar
-Testes com Postman
-Exportar a Coleção:
+## Importar no Postman:
 
-No Postman, exporte a coleção de exemplos para um arquivo JSON (ex.: GastroGo.postman_collection.json).
+Clique em "Import" no Postman e selecione o arquivo JSON
 
-Importar no Postman:
-
-Clique em Import no Postman e selecione o arquivo JSON.
