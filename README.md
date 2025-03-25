@@ -73,5 +73,5 @@ No Postman, exporte a coleção de exemplos para um arquivo JSON (ex.: GastroGo.
 
 ## Importar no Postman:
 
-Clique em "Import" no Postman e selecione o arquivo JSON
+Clique em "Import" no Postman e selecione o arquivo JSON: GastroGo.postman_collection.json disponível na raiz do projeto
 
