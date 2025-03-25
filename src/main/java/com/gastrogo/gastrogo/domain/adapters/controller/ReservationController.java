@@ -13,9 +13,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 
-/**
- * Endpoints para gerenciar reservas de restaurantes.
- */
 @RestController
 @RequestMapping("/api/reservations")
 @RequiredArgsConstructor
@@ -24,9 +21,6 @@ public class ReservationController {
   private final MakeReservationUseCase makeReservationUseCase;
   private final ManageReservationUseCase manageReservationUseCase;
 
-  /**
-   * Cria uma nova reserva.
-   */
   @Operation(summary = "Cria uma nova reserva", description = "Cria uma nova reserva de restaurante com os dados fornecidos.")
   @ApiResponses(value = {
           @ApiResponse(responseCode = "200", description = "Reserva criada com sucesso"),
@@ -43,9 +37,6 @@ public class ReservationController {
     return ResponseEntity.ok(reservation);
   }
 
-  /**
-   * Cancela uma reserva.
-   */
   @Operation(summary = "Cancela uma reserva", description = "Cancela a reserva identificada pelo ID, alterando seu status para CANCELLED.")
   @ApiResponses(value = {
           @ApiResponse(responseCode = "200", description = "Reserva cancelada com sucesso"),
@@ -61,9 +52,6 @@ public class ReservationController {
     }
   }
 
-  /**
-   * Conclui uma reserva.
-   */
   @Operation(summary = "Conclui uma reserva", description = "Marca a reserva identificada pelo ID como COMPLETED, indicando que a reserva foi finalizada.")
   @ApiResponses(value = {
           @ApiResponse(responseCode = "200", description = "Reserva concluída com sucesso"),
@@ -80,9 +68,6 @@ public class ReservationController {
   }
 }
 
-/**
- * DTO para criação de reserva, que evita expor a entidade diretamente.
- */
 @Data
 class CreateReservationRequest {
   private String restaurantId;

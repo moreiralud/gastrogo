@@ -52,7 +52,6 @@ class MakeReservationServiceTest {
 
   @Test
   void shouldFailIfNumberOfPeopleExceedsCapacity() {
-    // Simula um restaurante de capacidade 10
     Restaurant restMock = new Restaurant("Pizzaria", "Local", "Italiana", 10, "10h-22h");
     restMock.setId("rest001");
 
@@ -66,12 +65,10 @@ class MakeReservationServiceTest {
 
   @Test
   void shouldCreateReservationSuccessfully() {
-    // Simula um restaurante válido
     Restaurant rest = new Restaurant("Burger House", "Center", "American", 50, "9h-23h");
     rest.setId("restXYZ");
     when(restaurantRepository.findById("restXYZ")).thenReturn(Optional.of(rest));
 
-    // Simula comportamento do repositório: retorna o mesmo objeto salvo
     when(reservationRepository.save(any(Reservation.class)))
             .thenAnswer(invocation -> invocation.getArgument(0));
 
@@ -85,7 +82,6 @@ class MakeReservationServiceTest {
     assertEquals("restXYZ", result.getRestaurantId());
     assertEquals("userABC", result.getUserId());
     assertEquals(futureDate, result.getDateTime());
-    // Comparar o enum corretamente:
     assertEquals(ReservationStatus.CONFIRMED, result.getStatus());
   }
 }

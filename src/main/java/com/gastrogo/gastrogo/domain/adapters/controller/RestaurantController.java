@@ -22,9 +22,7 @@ public class RestaurantController {
   private final CreateRestaurantUseCase createRestaurantUseCase;
   private final SearchRestaurantsUseCase searchRestaurantsUseCase;
 
-  /**
-   * Cadastra um novo restaurante.
-   */
+
   @Operation(
           summary = "Cadastra um novo restaurante",
           description = "Cria um restaurante com as informações fornecidas e retorna o restaurante criado com seu ID."
@@ -46,9 +44,6 @@ public class RestaurantController {
     return ResponseEntity.ok(saved);
   }
 
-  /**
-   * Busca um restaurante por ID.
-   */
   @Operation(
           summary = "Busca restaurante por ID",
           description = "Retorna um restaurante com base no ID fornecido. Retorna 404 se não encontrado."
@@ -67,9 +62,6 @@ public class RestaurantController {
             .orElse(ResponseEntity.notFound().build());
   }
 
-  /**
-   * Busca restaurantes por nome.
-   */
   @Operation(
           summary = "Busca restaurantes por nome",
           description = "Retorna uma lista de restaurantes que contêm o nome informado."
@@ -85,9 +77,6 @@ public class RestaurantController {
     return ResponseEntity.ok(searchRestaurantsUseCase.findByName(name));
   }
 
-  /**
-   * Busca restaurantes por localização.
-   */
   @Operation(
           summary = "Busca restaurantes por localização",
           description = "Retorna uma lista de restaurantes localizados na área especificada."
@@ -103,9 +92,6 @@ public class RestaurantController {
     return ResponseEntity.ok(searchRestaurantsUseCase.findByLocation(location));
   }
 
-  /**
-   * Busca restaurantes por tipo de cozinha.
-   */
   @Operation(
           summary = "Busca restaurantes por tipo de cozinha",
           description = "Retorna uma lista de restaurantes que servem o tipo de cozinha especificado."

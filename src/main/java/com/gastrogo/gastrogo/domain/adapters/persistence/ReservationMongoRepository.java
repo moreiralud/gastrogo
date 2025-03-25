@@ -14,5 +14,5 @@ public interface ReservationMongoRepository extends
 {
   List<Reservation> findByRestaurantId(String restaurantId);
   List<Reservation> findByUserId(String userId);
-  // ...
+
 }

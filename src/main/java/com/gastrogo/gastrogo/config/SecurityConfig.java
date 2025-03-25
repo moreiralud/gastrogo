@@ -15,14 +15,11 @@ public class SecurityConfig {
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http
             .authorizeHttpRequests(authorize -> authorize
-                    // Libera os endpoints do Swagger para acesso sem autenticação
                     .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
-                    // Exige autenticação para os demais endpoints
                     .anyRequest().authenticated()
             )
             .httpBasic(Customizer.withDefaults())
-            .csrf(csrf -> csrf.disable()); // Desabilite CSRF se não estiver usando formulários
-
+            .csrf(csrf -> csrf.disable());
     return http.build();
   }
 }

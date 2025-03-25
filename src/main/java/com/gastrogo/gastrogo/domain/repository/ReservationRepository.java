@@ -10,5 +10,5 @@ public interface ReservationRepository {
   Optional<Reservation> findById(String id);
   List<Reservation> findByRestaurantId(String restaurantId);
   List<Reservation> findByUserId(String userId);
-  // ...
+
 }

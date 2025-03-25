@@ -54,12 +54,10 @@ class EvaluateRestaurantServiceTest {
 
   @Test
   void shouldCreateReviewAndAttachToRestaurant() {
-    // Mock do restaurante
     Restaurant rest = new Restaurant("Test Restaurant", "Location", "Fusion", 100, "9h-22h");
     rest.setId("restOK");
     when(restaurantRepository.findById("restOK")).thenReturn(Optional.of(rest));
 
-    // Mock do reviewRepo
     when(reviewRepository.save(any(Review.class)))
             .thenAnswer(inv -> {
               Review r = inv.getArgument(0);

@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface ReviewRepository {
   Review save(Review review);
+
   List<Review> findByRestaurantId(String restaurantId);
-  // ...
 }

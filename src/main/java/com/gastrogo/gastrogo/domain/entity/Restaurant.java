@@ -20,11 +20,8 @@ public class Restaurant {
   private String cuisineType;
   private int capacity;
 
-  // Exemplo: horário de funcionamento simples (8h-22h), apenas armazenando string
   private String openingHours;
 
-  // Pode conter avaliações (reviews), mas depende se quer armazenar em subdocument
-  // ou em coleção separada. Simples: guardamos IDs de reviews ou guardamos a lista.
   private List<Review> reviews = new ArrayList<>();
 
   public Restaurant(String name, String location, String cuisineType, int capacity, String openingHours) {

@@ -27,7 +27,6 @@ public class RestaurantSteps {
 
   @Before
   public void setup() {
-    // Se necessário, configure dados iniciais ou mocks.
   }
 
   @Given("um restaurante com nome {string}, localização {string}, tipo {string}, capacidade {int} e horário de funcionamento {string}")
@@ -50,7 +49,7 @@ public class RestaurantSteps {
     String response = mvcResult.getResponse().getContentAsString();
     Restaurant created = objectMapper.readValue(response, Restaurant.class);
     assertNotNull(created.getId(), "O ID não deve ser nulo");
-    restaurant = created; // Atualiza o objeto para uso posterior
+    restaurant = created;
   }
 
   @Then("eu posso recuperar o restaurante com nome {string} e localização {string}")

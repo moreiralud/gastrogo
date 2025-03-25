@@ -1,4 +1,5 @@
 package com.gastrogo.gastrogo.domain.repository;
+
 import com.gastrogo.gastrogo.domain.entity.Restaurant;
 
 import java.util.List;

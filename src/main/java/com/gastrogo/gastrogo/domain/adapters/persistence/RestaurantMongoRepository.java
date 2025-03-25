@@ -10,12 +10,8 @@ import java.util.List;
 @Repository
 public interface RestaurantMongoRepository extends
         MongoRepository<Restaurant, String>,
-        RestaurantRepository
-{
-  // Vários métodos do MongoRepository já se alinham com a interface do domínio
+        RestaurantRepository {
 
-  // Precisamos mapear os métodos custom
-  // ex.: findByNameContaining
   List<Restaurant> findByNameContaining(String name);
 
   List<Restaurant> findByLocation(String location);

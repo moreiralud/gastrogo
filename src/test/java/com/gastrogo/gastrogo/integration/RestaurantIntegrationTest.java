@@ -15,11 +15,14 @@ import org.testcontainers.containers.MongoDBContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @Testcontainers
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -43,11 +46,9 @@ public class RestaurantIntegrationTest {
 
   @Test
   public void testCreateAndGetRestaurant() throws Exception {
-    // Cria um objeto Restaurant para teste
     Restaurant newRestaurant = new Restaurant("Integration Restaurant", "Downtown", "Italian", 50, "8h-22h");
     String restaurantJson = objectMapper.writeValueAsString(newRestaurant);
 
-    // Envia uma requisição POST para criar o restaurante com httpBasic e CSRF (ajuste se necessário)
     MvcResult postResult = mockMvc.perform(post("/api/restaurants")
                     .with(httpBasic("user", "password"))
                     .with(csrf())
@@ -56,15 +57,12 @@ public class RestaurantIntegrationTest {
             .andExpect(status().isOk())
             .andReturn();
 
-    // Converte a resposta JSON em um objeto Restaurant
     String postResponse = postResult.getResponse().getContentAsString();
     Restaurant createdRestaurant = objectMapper.readValue(postResponse, Restaurant.class);
 
-    // Verifica se o restaurante foi criado e possui um ID gerado
     assertNotNull(createdRestaurant.getId(), "O ID não deve ser nulo");
     assertEquals("Integration Restaurant", createdRestaurant.getName());
 
-    // Realiza uma requisição GET para buscar o restaurante criado pelo ID
     mockMvc.perform(get("/api/restaurants/" + createdRestaurant.getId())
                     .with(httpBasic("user", "password"))
                     .contentType(MediaType.APPLICATION_JSON))

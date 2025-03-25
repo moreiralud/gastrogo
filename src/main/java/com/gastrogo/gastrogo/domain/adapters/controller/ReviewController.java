@@ -20,11 +20,7 @@ public class ReviewController {
 
   private final EvaluateRestaurantUseCase evaluateRestaurantUseCase;
   private final ReviewRepository reviewRepository;
-  // ou se quiser, injete um "SearchReviewUseCase" se tiver
 
-  /**
-   * Cria uma avaliação para um restaurante.
-   */
   @Operation(
           summary = "Cria uma avaliação",
           description = "Cria uma nova avaliação para um restaurante com os dados fornecidos e retorna a avaliação criada."
@@ -46,9 +42,7 @@ public class ReviewController {
     }
   }
 
-  /**
-   * Lista avaliações de um restaurante.
-   */
+
   @Operation(
           summary = "Lista avaliações por restaurante",
           description = "Retorna uma lista de avaliações associadas ao restaurante identificado pelo ID fornecido."

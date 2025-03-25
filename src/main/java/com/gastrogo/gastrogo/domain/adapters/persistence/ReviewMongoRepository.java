@@ -10,7 +10,6 @@ import java.util.List;
 @Repository
 public interface ReviewMongoRepository extends
         MongoRepository<Review, String>,
-        ReviewRepository
-{
+        ReviewRepository {
   List<Review> findByRestaurantId(String restaurantId);
 }

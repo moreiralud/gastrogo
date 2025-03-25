@@ -14,17 +14,16 @@ public class Review {
   private String id;
   private String restaurantId;
   private String userId;
-  private double rating;   // ex: 0..5
+  private double rating;
   private String comment;
 
   public Review(String restaurantId, String userId, double rating, String comment) {
     this.restaurantId = restaurantId;
     this.userId = userId;
-    setRating(rating);  // Use o setter personalizado para aplicar a validação
+    setRating(rating);
     this.comment = comment;
   }
 
-  // Sobrescreva o setter para validar o rating
   public void setRating(double rating) {
     if (rating < 0 || rating > 5) {
       throw new IllegalArgumentException("Invalid rating: rating must be between 0 and 5.");
