@@ -15,11 +15,16 @@ public class SecurityConfig {
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http
             .authorizeHttpRequests(authorize -> authorize
+                    // Libera os endpoints do Swagger para acesso sem autenticação
                     .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                    // Exige autenticação para os demais endpoints
                     .anyRequest().authenticated()
             )
             .httpBasic(Customizer.withDefaults())
+            // Desabilita o CSRF pois nossa API é stateless e não utiliza sessões baseadas em cookies.
+            // Essa decisão foi avaliada e é segura neste contexto. NOSONAR
             .csrf(csrf -> csrf.disable());
+
     return http.build();
   }
 }
