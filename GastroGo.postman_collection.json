@@ -1,0 +1,462 @@
+{
+	"info": {
+		"_postman_id": "d1255546-1747-4e48-b363-b6fcaa01acbb",
+		"name": "GastroGo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15767856"
+	},
+	"item": [
+		{
+			"name": "Cria um restaurante",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic YWRtaW46MTIzNDU2"
+					},
+					{
+						"key": "Cookie",
+						"value": "JSESSIONID=168B39A5FCB9ACE62B2ED161DF97EBFF"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"name\": \"Exemplo Restaurante\",\n        \"location\": \"Centro da Cidade\",\n        \"cuisineType\": \"Italian\",\n        \"capacity\": 50,\n        \"openingHours\": \"09:00-22:00\",\n        \"reviews\": [],\n        \"averageRating\": 0\n      }"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/restaurants",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"restaurants"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar Restaurante por ID",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/restaurants/67e1e9543469d94353a3e3ed",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"restaurants",
+						"67e1e9543469d94353a3e3ed"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar Restaurantes por Nome",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/restaurants/search/by-name?name=Exemplo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"restaurants",
+						"search",
+						"by-name"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Exemplo"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar Restaurantes por Localização  bash Copiar",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/restaurants/search/by-location?location=Centro%20da%20Cidade",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"restaurants",
+						"search",
+						"by-location"
+					],
+					"query": [
+						{
+							"key": "location",
+							"value": "Centro%20da%20Cidade"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar Restaurantes por Tipo de Cozinha",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/restaurants/search/by-cuisine?cuisine=Italian",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"restaurants",
+						"search",
+						"by-cuisine"
+					],
+					"query": [
+						{
+							"key": "cuisine",
+							"value": "Italian"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cria uma Reserva",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n         \"restaurantId\": \"67e1e7f93469d94353a3e3ec\",\n         \"userId\": \"admin\",\n         \"dateTime\": \"2025-03-25T20:00:00\",\n         \"numberOfPeople\": 4\n     }"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/reservations",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"reservations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Completar uma Reserva",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/reservations/67e1ef663469d94353a3e3ee/complete",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"reservations",
+						"67e1ef663469d94353a3e3ee",
+						"complete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cancelar uma Reserva",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/reservations/67e1f0203469d94353a3e3ef/cancel",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"reservations",
+						"67e1f0203469d94353a3e3ef",
+						"cancel"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criar uma Avaliação",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"restaurantId\": \"67e1e7f93469d94353a3e3ec\",\n  \"userId\": \"user123\",\n  \"rating\": 4,\n  \"comment\": \"Ótimo restaurante!\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/reviews",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"reviews"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Avaliações por Restaurante",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/reviews/by-restaurant/67e1e7f93469d94353a3e3ec",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"reviews",
+						"by-restaurant",
+						"67e1e7f93469d94353a3e3ec"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
